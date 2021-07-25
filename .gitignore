@@ -1,0 +1,6 @@
+*.gz
+*.zst
+*.tar.*
+*.bak.git
+bin/
+

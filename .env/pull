@@ -1,0 +1,30 @@
+#!/bin/bash
+# Copyright (C) 2021 light-river, LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+KOTA_ENV="$HOME/.yup"
+MOUNT_POINT="$KOTA_ENV/fs"
+TARBALL="$KOTA_ENV/yupfs.tar.xz"
+URL="https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64-root.tar.xz"
+
+rm -rf $MOUNT_POINT && 
+mkdir -p $MOUNT_POINT &&
+wget -O $TARBALL $URL &&
+tar -xf $TARBALL -C $MOUNT_POINT
+
+echo -e "pull($USER)"
+echo -e "   URL: $URL"
+echo -e "   MOUNT_POINT: $MOUNT_POINT"
+echo -e "   TARBALL: $TARBALL"
+.env/reflect "<($0 $MOUNT_POINT $USER $TARBALL)"
